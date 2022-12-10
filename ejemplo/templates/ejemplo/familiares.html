@@ -1,0 +1,14 @@
+{% extends 'ejemplo/base.html' %}
+
+{%block titulo %}
+Lista de Familiares
+{% endblock %}
+{% block contenido %}
+</ul>
+    {% for familiar in lista_familiares %}
+       <li> Nombre: {{familiar.nombre}}, Dirección: {{familiar.direccion}}, Pasaporte: {{familiar.numero_pasaporte}} </li>
+    {% endfor %}
+    </ul>
+{% endblock %}
+
+
