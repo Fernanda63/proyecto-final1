@@ -1,0 +1,19 @@
+{% extends 'ejemplo/base.html' %}
+
+{% block titulo %}
+Buscar Amigos
+{% endblock %}
+
+{% block contenido %}
+<form action="/mis-Amigos/buscar" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+  </form>
+
+  {% for Amigo in lista_Amigos %}
+      <ul>
+          <li> Nombre: {{Amigo.nombre}}, Dirección: {{Amigo.direccion}}, Pasaporte: {{Amigo.numero_pasaporte}}</li>
+      </ul>
+  {% endfor %}
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'ejemplo/base.html' %}
+{% block titulo%} Lista de todos mis Clientes {% endblock %}
+{% block contenido %}
+  {% for Cliente in lista_Clientes %}
+      <ul>
+          <li> Nombre: {{Cliente.nombre}}, Dirección: {{Cliente.direccion}} </li>
+      </ul>
+  {% endfor %}
+{% endblock %}
