@@ -10,9 +10,13 @@ from ejemplo.forms import Buscar, ClientesForm
 
 from django.views import View 
 
+from ejemplo.forms import Buscar
+
 from ejemplo.models import Amigo
 
 from ejemplo.models import Cliente
+
+
 
 
 def index(request):
@@ -134,6 +138,28 @@ def mostrar_Amigos(request):
   return render(request, "ejemplo/Amigos.html", {"lista_Amigos": lista_Amigos})
 
 
+class AltaAmigo(View):
+
+    form_class = AmigosForm
+    template_name = 'ejemplo/alta_Amigo.html'
+    initial = {"nombre":"", "direccion":"", "numero_pasaporte":""}
+
+    def get(self, request):
+        form = self.form_class(initial=self.initial)
+        return render(request, self.template_name, {'form':form})
+
+    def post(self, request):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            form.save()
+            msg_exito = f"se cargo con éxito el Amigo {form.cleaned_data.get('nombre')}"
+            form = self.form_class(initial=self.initial)
+            return render(request, self.template_name, {'form':form, 
+                                                        'msg_exito': msg_exito})
+        
+        return render(request, self.template_name, {"form": form})
+
+
 
 class BuscarAmigo(View):
     form_class = Buscar
@@ -157,6 +183,27 @@ def mostrar_Clientes(request):
   lista_Clientes = Cliente.objects.all()
   return render(request, "ejemplo/Clientes.html", {"lista_Clientes": lista_Clientes})
 
+class AltaCliente(View):
+
+    form_class = ClientesForm
+    template_name = 'ejemplo/alta_Cliente.html'
+    initial = {"nombre":"", "direccion":""}
+
+    def get(self, request):
+        form = self.form_class(initial=self.initial)
+        return render(request, self.template_name, {'form':form})
+
+    def post(self, request):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            form.save()
+            msg_exito = f"se cargo con éxito el Cliente {form.cleaned_data.get('nombre')}"
+            form = self.form_class(initial=self.initial)
+            return render(request, self.template_name, {'form':form, 
+                                                        'msg_exito': msg_exito})
+        
+        return render(request, self.template_name, {"form": form})
+
 
 class BuscarCliente(View):
     form_class = Buscar
@@ -169,10 +216,10 @@ class BuscarCliente(View):
         form = self.form_class(request.POST)
         if form.is_valid():
             nombre = form.cleaned_data.get("nombre")
-            lista_Clientes = Familiar.objects.filter(nombre__icontains=nombre).all() 
+            lista_Clientes = Cliente.objects.filter(nombre__icontains=nombre).all() 
             form = self.form_class(initial=self.initial)
             return render(request, self.template_name, {'form':form, 
-                                                        'lista_Clientees':lista_Clientes})
+                                                        'lista_Clientes':lista_Clientes})
         return render(request, self.template_name, {"form": form})
 
 class ActualizarAmigo(View):

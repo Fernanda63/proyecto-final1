@@ -3,7 +3,7 @@
 {% for Amigo in lista_Amigo %}
 <ul>
     <li> Nombre: {{Amigo.nombre}}, Dirección: {{Amigo.direccion}}, Pasaporte: {{Amigo.numero_pasaporte}}
-        <!-- Esto agrega un link al form de actulización-->
+        
         <a href='actualizar/{{ Amigo.id }}'>Actualizar</a>
     </li>
 </ul>

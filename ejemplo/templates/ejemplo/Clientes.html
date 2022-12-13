@@ -4,7 +4,7 @@
 {% for Cliente in lista_Clientes %}
 <ul>
     <li> Nombre: {{Cliente.nombre}}, Dirección: {{Cliente.direccion}}
-        <!-- Esto agrega un link al form de actulización-->
+        
         <a href='actualizar/{{ Cliente.id }}'>Actualizar</a>
     </li>
 </ul>

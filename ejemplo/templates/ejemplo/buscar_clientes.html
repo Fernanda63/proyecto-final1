@@ -1,9 +1,17 @@
 {% extends 'ejemplo/base.html' %}
-{% block titulo%} Lista de todos mis Clientes {% endblock %}
+
+{% block titulo %} Lista de todos mis Clientes {% endblock %}
+
 {% block contenido %}
+<form action="/mis-Clientes/buscar" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+  </form>
+
   {% for Cliente in lista_Clientes %}
       <ul>
-          <li> Nombre: {{Cliente.nombre}}, Dirección: {{Cliente.direccion}} </li>
+          <li> Nombre: {{familiar.nombre}}, Dirección: {{familiar.direccion}}</li>
       </ul>
   {% endfor %}
 {% endblock %}
