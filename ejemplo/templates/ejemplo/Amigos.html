@@ -1,6 +1,6 @@
 {% extends 'ejemplo/base.html' %}
 {% block contenido %}
-{% for Amigo in lista_Amigo %}
+{% for Amigo in lista_Amigos %}
 <ul>
     <li> Nombre: {{Amigo.nombre}}, Dirección: {{Amigo.direccion}}, Pasaporte: {{Amigo.numero_pasaporte}}
         
@@ -13,6 +13,7 @@
 {% block titulo%}
 Lista de todos mis Amigos
 {% endblock %}
+
 
 
 

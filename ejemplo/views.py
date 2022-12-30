@@ -16,6 +16,7 @@ from ejemplo.models import Amigo
 
 from ejemplo.models import Cliente
 
+from django.views.generic import DetailView, ListView, CreateView, DeleteView, UpdateView
 
 
 
@@ -163,7 +164,7 @@ class AltaAmigo(View):
 
 class BuscarAmigo(View):
     form_class = Buscar
-    template_name = 'ejemplo/buscar.html'
+    template_name = 'ejemplo/buscar_amigos.html'
     initial = {"nombre":""}
     def get(self, request):
         form = self.form_class(initial=self.initial)
@@ -207,7 +208,7 @@ class AltaCliente(View):
 
 class BuscarCliente(View):
     form_class = Buscar
-    template_name = 'ejemplo/buscar.html'
+    template_name = 'ejemplo/buscar_clientes.html'
     initial = {"nombre":""}
     def get(self, request):
         form = self.form_class(initial=self.initial)
@@ -271,3 +272,30 @@ class ActualizarCliente(View):
                                                       'msg_exito': msg_exito})
       
       return render(request, self.template_name, {"form": form})
+
+
+class FamiliarList(ListView):
+  model = Familiar
+
+class FamiliarCrear(CreateView):
+  model = Familiar
+  success_url = "/panel-familia"
+  fields = ["nombre", "direccion", "numero_pasaporte"]
+
+
+class FamiliarBorrar(DeleteView):
+  model = Familiar
+  success_url = "/panel-familia"
+
+class FamiliarActualizar(UpdateView):
+  model = Familiar
+  success_url = "/panel-familia"
+  fields = ["nombre", "direccion", "numero_pasaporte"]  
+
+class FamiliarActualizar(UpdateView):
+    model = Familiar
+    success_url = "/success_updated_message.html"
+    fields = ["nombre", "direccion", "numero_pasaporte"]  
+
+class FamiliarDetalle(DetailView):
+  model = Familiar
